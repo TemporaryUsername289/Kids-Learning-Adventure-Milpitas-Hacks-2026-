@@ -3,7 +3,7 @@ import random
 
 app = Flask(__name__)
 
-# Expanded Lesson Database (10 items each)
+#The data for the lessons, including visual representations and the correct answers
 LESSON_DATA = {
     "letters": [
         {"visual": "a", "answer": "Apple"}, {"visual": "b", "answer": "Bear"},
@@ -72,6 +72,7 @@ LESSON_DATA = {
 
 @app.route('/')
 def home():
+    #Brings the user to the main page
     return render_template('index.html')
 
 @app.route('/api/lesson/<category>')
@@ -82,12 +83,15 @@ def get_lesson(category):
     items = LESSON_DATA[category]
     lesson = random.choice(items)
     
-    # Generate 3 wrong answers (total of 4 options)
+    #Take all answers for that lesson
     all_answers = [i["answer"] for i in items]
+    #Find wrong answers
     wrong_answers = [a for a in all_answers if a != lesson["answer"]]
+    #Set options to the answer and 3 random wrong answers
     options = [lesson["answer"]] + random.sample(wrong_answers, 3)
     random.shuffle(options)
     
+    #Allows for frontend to process the script
     return jsonify({
         "visual": lesson["visual"],
         "correct": lesson["answer"],
