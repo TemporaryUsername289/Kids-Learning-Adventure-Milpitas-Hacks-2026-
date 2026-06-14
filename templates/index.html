@@ -1,3 +1,4 @@
+<!-- Website setup -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,7 @@
 </head>
 <body>
 
+    <!-- Main screen with the buttons -->
     <div id="main-menu" class="screen active">
         <h1>What are we learning today?</h1>
         <div class="button-grid">
@@ -23,6 +25,7 @@
         </div>
     </div>
 
+    <!-- Each lesson screen -->
     <div id="lesson-screen" class="screen">
         <button id="back-btn" class="nav-btn">🔙 Back to Menu</button>
         <h2 id="lesson-title">Lesson Loading...</h2>
@@ -32,6 +35,7 @@
 
     <div id="transition-overlay"></div>
     
+    <!-- Links to Javascript -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
