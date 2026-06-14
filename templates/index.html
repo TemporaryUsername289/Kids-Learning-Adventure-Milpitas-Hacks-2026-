@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids Learning Adventure</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div id="main-menu" class="screen active">
+        <h1>What are we learning today?</h1>
+        <div class="button-grid">
+            <button class="menu-btn" data-category="letters" style="background-color: #FF9AA2;">🍎 Letters</button>
+            <button class="menu-btn" data-category="colors" style="background-color: #FFB7B2;">🎨 Colors</button>
+            <button class="menu-btn" data-category="items" style="background-color: #FFDAC1;">🧸 Daily Items</button>
+            <button class="menu-btn" data-category="shapes" style="background-color: #FFF2A8;">🔺 Shapes</button>
+            <button class="menu-btn" data-category="math" style="background-color: #EAE6FF;">➕ Basic Math</button>
+            <button class="menu-btn" data-category="feelings" style="background-color: #E2F0CB;">😊 Feelings</button>
+            <button class="menu-btn" data-category="weather" style="background-color: #B5EAD7;">☀️ Weather</button>
+            <button class="menu-btn" data-category="animals" style="background-color: #C7CEEA;">🐶 Animals</button>
+            <button class="menu-btn" data-category="vehicles" style="background-color: #F8B195;">🚗 Vehicles</button>
+        </div>
+    </div>
+
+    <div id="lesson-screen" class="screen">
+        <button id="back-btn" class="nav-btn">🔙 Back to Menu</button>
+        <h2 id="lesson-title">Lesson Loading...</h2>
+        <div id="lesson-content">
+            </div>
+    </div>
+
+    <div id="transition-overlay"></div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+/* General reset and font setup */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+}
+
+body {
+    background-color: #fdf6e3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    color: #333;
+}
+
+h1 {
+    font-size: 3.5rem; /* Larger font */
+    margin-bottom: 40px;
+    color: #4a4a4a;
+}
+
+/* Screen Management */
+.screen {
+    display: none;
+    width: 100%;
+    max-width: 1100px; /* Wider for the 3x3 grid */
+    padding: 30px;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* The Grid of Buttons */
+.button-grid {
+    display: grid;
+    /* This forces exactly 3 columns, and automatically adjusts rows */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 25px; /* Bigger gap */
+}
+
+/* The BIGGER Rounded Rectangular Buttons */
+.menu-btn {
+    border: none;
+    border-radius: 35px; /* More rounded */
+    /* Much larger padding for a bigger footprint */
+    padding: 50px 30px; 
+    font-size: 2.2rem; /* Larger text/icon */
+    font-weight: bold;
+    color: #4a4a4a;
+    cursor: pointer;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+/* Interaction effects */
+.menu-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.18);
+}
+
+.menu-btn:active {
+    transform: translateY(5px);
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the Lesson Screen */
+.nav-btn {
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    padding: 15px 30px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    margin-bottom: 40px;
+}
+
+#lesson-title {
+    font-size: 5rem;
+    text-transform: capitalize;
+}
+
+/* Simple fix for smaller screens */
+@media (max-width: 800px) {
+    .button-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+    }
+}
+@media (max-width: 500px) {
+    .button-grid {
+        grid-template-columns: 1fr; /* 1 column on phones */
+    }
+}
+
+/* --- The Diagonal Swipe Transition Overlay --- */
+#transition-overlay {
+    position: fixed;
+    /* Make the block massive so corners don't show when rotated */
+    top: -50vh;
+    left: -50vw;
+    width: 200vw;
+    height: 200vh;
+    z-index: 9999;
+    pointer-events: none;
+    
+    /* Rotate 45deg to create the diagonal, and hide it top-right */
+    transform: rotate(45deg) translateY(-100%); 
+}
+
+/* We ONLY apply this class when we want it to move smoothly. 
+   Removing this class allows us to teleport it instantly! */
+.animate-swipe {
+    transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); 
+}
+
+/* Phase 1: Sweep in to cover the screen */
+.sweep-in {
+    transform: rotate(45deg) translateY(0) !important;
+    pointer-events: auto; /* Block clicking while transitioning */
+}
+
+/* Phase 2: Sweep out to the bottom left */
+.sweep-out {
+    transform: rotate(45deg) translateY(100%) !important;
+}
+
+/* --- The Flashcard Experience --- */
+.flashcard {
+    background-color: #fff;
+    width: 100%;
+    max-width: 500px;
+    height: 400px;
+    margin: 40px auto;
+    border-radius: 40px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    border: 5px dashed #ccc;
+}
+
+.flashcard:hover {
+    transform: scale(1.05);
+}
+
+.flashcard-front {
+    font-size: 8rem;
+    font-weight: bold;
+}
+
+.flashcard-back {
+    display: none; /* Hidden until clicked */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.motivation {
+    font-size: 2rem;
+    margin-top: 20px;
+    color: #fff;
+    font-weight: normal;
+}
+
+.visual-display {
+    font-size: 8rem;
+    margin: 20px 0;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* This keeps them 2x2 */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.option-btn {
+    padding: 20px;
+    font-size: 1.5rem;
+    border-radius: 20px;
+    border: none;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.option-btn:hover {
+    transform: scale(1.05);
+}
