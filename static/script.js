@@ -1,3 +1,4 @@
+// The elements
 const mainMenu = document.getElementById('main-menu');
 const lessonScreen = document.getElementById('lesson-screen');
 const menuButtons = document.querySelectorAll('.menu-btn');
@@ -10,11 +11,11 @@ let currentCategory = '';
 
 // Displays a "Game Screen" and creates buttons for the options.
 async function loadLesson(category) {
-    // 1. Fetch the data in the background without clearing the screen yet
+    // Fetch the data in the background
     const response = await fetch(`/api/lesson/${category}`);
     const data = await response.json();
     
-    // 2. Build the new HTML as a string or element
+    // Lesson UI
     const newContent = document.createElement('div');
     newContent.innerHTML = `
         <div class="visual-display">${data.visual}</div>
@@ -22,10 +23,11 @@ async function loadLesson(category) {
         <div id="feedback" style="margin-top:20px; font-size: 1.5rem;"></div>
     `;
 
-    // 3. Populate the buttons
+    // Place content in buttons
     const grid = newContent.querySelector('.options-grid');
     const feedback = newContent.querySelector('#feedback');
 
+    // Response to selection
     data.options.forEach(opt => {
         const btn = document.createElement('button');
         btn.textContent = opt;
@@ -44,8 +46,6 @@ async function loadLesson(category) {
         grid.appendChild(btn);
     });
 
-    // 4. Now perform the swap: replace the existing content with the new one
-    // This happens instantly, eliminating the "Loading..." flicker
     lessonContent.innerHTML = ''; 
     lessonContent.appendChild(newContent);
 }
@@ -78,6 +78,7 @@ function triggerTransition(targetScreen, categoryName = '', swipeColor = '#fdf6e
     }, 600);
 }
 
+// Waits for button click
 menuButtons.forEach(button => {
     button.addEventListener('click', () => {
         currentCategory = button.getAttribute('data-category');
@@ -86,6 +87,7 @@ menuButtons.forEach(button => {
     });
 });
 
+// Transition
 backBtn.addEventListener('click', () => {
     triggerTransition('menu', '', '#E1D3B8'); 
 });
